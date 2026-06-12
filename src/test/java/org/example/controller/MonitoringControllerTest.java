@@ -25,6 +25,7 @@ class MonitoringControllerTest {
         List<SampleStatus> capturedSampleStatuses;
         String capturedTimestamp;
         int renderCallCount = 0;
+        int shutdownCallCount = 0;
 
         @Override
         public void render(Map<OrderStatus, Long> statusCounts,
@@ -38,6 +39,11 @@ class MonitoringControllerTest {
 
         @Override
         public void clearScreen() {}
+
+        @Override
+        public void printShutdownMessage() {
+            this.shutdownCallCount++;
+        }
     }
 
     private static class StubSampleRepository implements SampleRepository {
@@ -202,6 +208,12 @@ class MonitoringControllerTest {
 
         SampleStatus status = spyView.capturedSampleStatuses.get(0);
         assertEquals("고갈", status.stockLevel());
+    }
+
+    @Test
+    void shutdownCallsPrintShutdownMessageOnce() {
+        controller.shutdown();
+        assertEquals(1, spyView.shutdownCallCount);
     }
 
     @Test

@@ -346,7 +346,7 @@ record SampleStatus(long sampleId, String name, int stock, String stockLevel) {}
 class MonitoringLoop {
     static final int REFRESH_INTERVAL_SECONDS = 3;
 
-    MonitoringLoop(MonitoringController controller, MonitoringView view)
+    MonitoringLoop(MonitoringController controller)
 
     void start();  // 폴링 루프 실행 — 블로킹 (q 입력까지 반복)
     void stop();   // 루프 종료 플래그 설정

@@ -65,7 +65,7 @@ src/test/java/org/example/          # main과 미러링된 패키지 구조
 
 - **자동 갱신**: `MonitoringLoop`가 N초 간격으로 Controller를 반복 호출한다
 - **화면 지우기**: 갱신 시마다 콘솔을 클리어(`\033[H\033[2J` 또는 `cls`/`clear`)한 뒤 재출력
-- **갱신 주기**: 기본 3초, `Main`에서 상수로 정의
+- **갱신 주기**: 기본 3초, `MonitoringLoop`에서 상수로 정의
 - **종료 조건**: `q` 입력 시 루프 종료 — 별도 입력 스레드로 감지
 - **집계 로직**: Repository에서 조회한 데이터를 Controller가 집계하여 View에 전달 (View는 집계 금지)
 
