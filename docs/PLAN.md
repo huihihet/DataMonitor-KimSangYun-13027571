@@ -409,7 +409,9 @@ public class Main {
 
 ### 5-1. ANSI 색상 상수 정의
 
-`MonitoringView` 내부에 상수로 정의한다.
+> Phase 3 구현 시 `MonitoringView`에 선행 정의된다. Phase 5에서는 적용 여부와 동작을 재검증한다.
+
+`MonitoringView` 내부 `private static final` 상수로 정의한다.
 
 ```java
 private static final String ANSI_RESET  = "\033[0m";
