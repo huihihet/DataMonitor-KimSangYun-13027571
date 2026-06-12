@@ -146,6 +146,7 @@ interface OrderRepository {
 | 테스트 케이스 | 검증 내용 |
 |--------------|-----------|
 | 정상 생성 | 모든 필드 저장 확인 |
+| sampleId null | `IllegalArgumentException` 발생 |
 | yield=1.0 (유효 최댓값) | 정상 생성 |
 | yield=0.0 이하 | `IllegalArgumentException` 발생 |
 | yield=1.0 초과 | `IllegalArgumentException` 발생 |
@@ -154,34 +155,57 @@ interface OrderRepository {
 | stock=0 (유효 최솟값) | 정상 생성 |
 | stock 음수 | `IllegalArgumentException` 발생 |
 | name null | `IllegalArgumentException` 발생 |
-| name 공백 문자열 | `IllegalArgumentException` 발생 |
+| name 공백 문자열 (`"  "`) | `IllegalArgumentException` 발생 |
 
 **`OrderTest`**
 
 | 테스트 케이스 | 검증 내용 |
 |--------------|-----------|
 | 정상 생성 | 모든 필드 저장 확인 |
+| orderId null | `IllegalArgumentException` 발생 |
+| sampleId null | `IllegalArgumentException` 발생 |
 | quantity=1 (유효 최솟값) | 정상 생성 |
 | quantity 0 이하 | `IllegalArgumentException` 발생 |
 | customerName null | `IllegalArgumentException` 발생 |
-| customerName 공백 | `IllegalArgumentException` 발생 |
+| customerName 공백 (`"  "`) | `IllegalArgumentException` 발생 |
+| status null | `IllegalArgumentException` 발생 |
+
+**`OrderStatusTest`**
+
+| 테스트 케이스 | 검증 내용 |
+|--------------|-----------|
+| 상수 개수 확인 | `OrderStatus.values().length == 5` |
+| 모든 상수 포함 여부 | RESERVED·PRODUCING·CONFIRMED·RELEASE·REJECTED 포함 확인 |
+
+**`SampleStatusTest`**
+
+| 테스트 케이스 | 검증 내용 |
+|--------------|-----------|
+| record 컴포넌트 저장 확인 | 모든 accessor가 생성자 인수와 일치 |
 
 **`InMemorySampleRepositoryTest`**
 
 | 테스트 케이스 | 검증 내용 |
 |--------------|-----------|
 | findAll | 더미 데이터 3건 반환 |
-| findById (존재) | 일치 시료 반환 |
-| findById (미존재) | `Optional.empty()` 반환 |
+| findAll 불변성 | 반환 리스트 `.add()` 시 `UnsupportedOperationException` |
+| findById (존재) | `id=2` → BetaWafer 반환, 모든 필드 일치 |
+| findById (미존재) | `id=99` → `Optional.empty()` |
 
 **`InMemoryOrderRepositoryTest`**
 
 | 테스트 케이스 | 검증 내용 |
 |--------------|-----------|
 | findAll | 더미 데이터 8건 반환 |
+| findAll 불변성 | 반환 리스트 `.add()` 시 `UnsupportedOperationException` |
 | findByStatus(RESERVED) | 2건 반환 |
+| findByStatus(PRODUCING) | 2건 반환 |
+| findByStatus(CONFIRMED) | 2건 반환 |
+| findByStatus(RELEASE) | 1건 반환 |
 | findByStatus(REJECTED) | 1건 반환 |
+| findBySampleId(1) | 3건 반환 |
 | findBySampleId(2) | 3건 반환 |
+| findBySampleId(미존재) | 빈 리스트 반환 |
 
 ### 완료 기준
 
