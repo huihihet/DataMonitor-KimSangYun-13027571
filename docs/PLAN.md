@@ -27,15 +27,23 @@
    src/test/java/org/example/   (미러링)
    ```
 3. 빈 클래스 파일 생성 (컴파일 가능한 상태)
-   - `Sample.java`, `Order.java`, `OrderStatus.java`
+   - `Sample.java`, `Order.java`
    - `SampleRepository.java`, `OrderRepository.java`
    - `InMemorySampleRepository.java`, `InMemoryOrderRepository.java`
    - `MonitoringController.java`, `MonitoringView.java`
    - `MonitoringLoop.java`, `Main.java`
+4. 완전 정의 파일 생성 (Phase 1에서 확정)
+   - `OrderStatus.java` — 5개 상수(`RESERVED, PRODUCING, CONFIRMED, RELEASE, REJECTED`) 완전 정의
+   - `SampleStatus.java` — record 4개 컴포넌트(`sampleId, name, stock, stockLevel`) 완전 정의
+5. 테스트 placeholder 파일 생성 (`src/test/` 하위 8개)
+   - `SampleTest`, `OrderTest`, `OrderStatusTest`, `SampleStatusTest`
+   - `InMemorySampleRepositoryTest`, `InMemoryOrderRepositoryTest`
+   - `MonitoringControllerTest`, `MonitoringViewTest`, `MonitoringIntegrationTest`
 
 ### 완료 기준
 
 - [ ] `./gradlew build` 성공
+- [ ] `./gradlew test` 통과 (placeholder 테스트 포함)
 - [ ] 모든 클래스 파일이 패키지 규칙에 맞게 위치
 
 ---
@@ -46,12 +54,7 @@
 
 ### 2-1. `OrderStatus` 열거형
 
-```java
-// model/entity/OrderStatus.java
-enum OrderStatus {
-    RESERVED, PRODUCING, CONFIRMED, RELEASE, REJECTED
-}
-```
+> Phase 1에서 완전 정의 완료. Phase 2에서 별도 수정 없이 그대로 사용한다.
 
 ### 2-2. `Sample` 엔티티
 
@@ -433,6 +436,7 @@ src/test/java/org/example/
 │   ├── entity/
 │   │   ├── SampleTest.java
 │   │   ├── OrderTest.java
+│   │   ├── OrderStatusTest.java
 │   │   └── SampleStatusTest.java    # record 필드 검증
 │   └── repository/
 │       ├── InMemorySampleRepositoryTest.java

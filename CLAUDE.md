@@ -30,7 +30,8 @@ src/main/java/org/example/
 │   ├── entity/
 │   │   ├── Sample.java              # 시료 도메인 객체
 │   │   ├── Order.java               # 주문 도메인 객체
-│   │   └── OrderStatus.java         # 주문 상태 열거형
+│   │   ├── OrderStatus.java         # 주문 상태 열거형
+│   │   └── SampleStatus.java        # Controller → View 전달용 record
 │   └── repository/
 │       ├── SampleRepository.java    # 시료 조회 인터페이스
 │       ├── OrderRepository.java     # 주문 조회 인터페이스
